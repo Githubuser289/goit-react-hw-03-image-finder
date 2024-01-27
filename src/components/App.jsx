@@ -6,17 +6,18 @@ import Button from './Button/Button';
 import Loader from './Loader/Loader';
 
 const IMAGES_PER_PAGE = 12;
+const INITIAL_STATE = {
+  query: '',
+  page: 1,
+  imagesData: [],
+  totalHits: 0,
+  areImages: false,
+  isLoading: false,
+  error: '',
+};
 
 class App extends Component {
-  state = {
-    query: '',
-    page: 1,
-    imagesData: [],
-    totalHits: 0,
-    areImages: false,
-    isLoading: false,
-    error: '',
-  };
+  state = INITIAL_STATE;
 
   componentDidUpdate(prevProps, prevState) {
     if (
@@ -71,7 +72,7 @@ class App extends Component {
     evt.preventDefault();
     const txt = evt.target[1].value;
     if (txt === '') return;
-    this.setState({ query: txt });
+    this.setState({ ...INITIAL_STATE, query: txt });
     document.getElementsByTagName('form')[0].reset();
   };
 
