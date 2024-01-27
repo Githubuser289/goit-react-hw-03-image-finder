@@ -6,7 +6,6 @@ import Button from './Button/Button';
 import Loader from './Loader/Loader';
 
 const IMAGES_PER_PAGE = 12;
-let counter = 0;
 
 class App extends Component {
   state = {
@@ -25,7 +24,6 @@ class App extends Component {
       this.state.query !== prevState.query
     ) {
       this.getImagesData();
-      console.log('updating...');
     }
   }
 
@@ -47,6 +45,7 @@ class App extends Component {
         });
         return dataList;
       });
+      if (dataList.length === 0) flag = false;
       this.setState(state => ({
         imagesData: [...state.imagesData, ...dataList],
         areImages: flag,
@@ -60,7 +59,6 @@ class App extends Component {
   }
 
   handleClick = () => {
-    console.log('Load more - clicked');
     const nrtotpag = Math.floor(this.state.totalHits / IMAGES_PER_PAGE);
     let page = this.state.page;
     page++;
@@ -78,16 +76,19 @@ class App extends Component {
   };
 
   render() {
-    const { page, imagesData, areImages, totalHits, isLoading, error } =
-      this.state;
-    counter++;
-    console.log('counter=', counter, '   totalHits=', totalHits);
+    const { page, imagesData, areImages, isLoading } = this.state;
+
     return (
       <>
         <Searchbar submitCallback={this.handleSubmit} />
         {isLoading && <Loader />}
         <ImageGallery data={imagesData} />
         {areImages ? <Button onClickCallback={this.handleClick} /> : null}
+        {!areImages && page === 1 ? (
+          <p>
+            <br /> There are no images to display yet.
+          </p>
+        ) : null}
         {!areImages && page > 1 ? (
           <p>
             <br /> You have seen all the images.

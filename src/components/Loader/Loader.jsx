@@ -15,7 +15,6 @@ class Loader extends Component {
       />
     );
   }
-
-  //   return <p>incarca imaginile</p>;
 }
+
 export default Loader;

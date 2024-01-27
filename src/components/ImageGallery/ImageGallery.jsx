@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
 import ImageGalleryItem from 'components/ImageGalleryItem/ImageGalleryItem';
 import style from './ImageGallery.module.css';
@@ -15,5 +16,9 @@ class ImageGallery extends Component {
     );
   }
 }
+
+ImageGallery.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
 export default ImageGallery;

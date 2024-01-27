@@ -17,7 +17,6 @@ class ImageGalleryItem extends Component {
 
   render() {
     const { webformatURL, largeImageURL } = this.props.itemData;
-    console.log('galleryItem->', largeImageURL);
     return (
       <>
         <li className={style.ImageGalleryItem}>

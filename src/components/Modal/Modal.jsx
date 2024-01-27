@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 import style from './Modal.module.css';
 
 class Modal extends Component {
@@ -33,5 +34,10 @@ class Modal extends Component {
     );
   }
 }
+
+Modal.propTypes = {
+  itemURL: PropTypes.string.isRequired,
+  callback: PropTypes.func.isRequired,
+};
 
 export default Modal;
